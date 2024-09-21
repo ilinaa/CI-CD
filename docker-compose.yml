@@ -15,7 +15,7 @@ services:
 
 
   app:
-    image: cicdproject
+    image: ilinaa/cicdproject:latest
     container_name: cicdproject
     build: .
     restart: unless-stopped
