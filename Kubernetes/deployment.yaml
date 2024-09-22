@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicdproject-app
+  namespace: cicdproject-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicdproject
+  template:
+    metadata:
+      labels:
+        app: cicdproject
+    spec:
+      containers:
+        - name: cicdproject
+          image: ilinaa/cicdproject:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: app-config
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/src/main/resources/application-prod.properties
+              subPath: application-prod.properties
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config

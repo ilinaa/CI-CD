@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cicdproject-app-service
+  namespace: cicdproject-namespace
+spec:
+  selector:
+    app: cicdproject
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
